@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RED Talk</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      background-color: #ffffff;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      overflow: hidden;
+    }
+
+    .loading-screen {
+      position: absolute;
+      inset: 0;
+      background: #ffffff;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 10;
+      transition: opacity 1.5s ease-out;
+    }
+
+    .loading-screen.fade-out {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .logo-container {
+      flex-grow: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    svg {
+      width: 300px;
+      height: 300px;
+    }
+
+    /* Animasi lingkaran muter */
+    .circle-outer {
+      animation: rotate 10s linear infinite;
+    }
+
+    .circle-inner {
+      animation: rotate 15s linear infinite reverse;
+    }
+
+    @keyframes rotate {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    /* RED pulse */
+    .red-text {
+      font-size: 140px;
+      font-weight: bold;
+      fill: #ff0000;
+      text-shadow: 0 6px 15px rgba(255, 0, 0, 0.25);
+      animation: pulse 2.5s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.08); }
+    }
+
+    /* Typewriter effect untuk Talk */
+    .talk-text {
+      font-size: 48px;
+      font-weight: bold;
+      fill: #c00000;
+      overflow: hidden;
+      white-space: nowrap;
+      border-right: 4px solid #c00000;
+      width: 0;
+      animation: typing 2s steps(20) forwards 1s, blink 0.8s step-end infinite 3s;
+    }
+
+    @keyframes typing {
+      from { width: 0; }
+      to { width: 140px; }
+    }
+
+    @keyframes blink {
+      50% { border-color: transparent; }
+    }
+
+    .copyright-loading {
+      margin-bottom: 40px;
+      font-size: 14px;
+      color: #888888;
+      opacity: 0;
+      animation: fadeIn 1s ease-in forwards 3.5s;
+    }
+
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+
+    /* Halaman Welcome */
+    .welcome-screen {
+      position: absolute;
+      inset: 0;
+      background: #ffffff;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 1.5s ease-in;
+    }
+
+    .welcome-screen.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .welcome-title {
+      font-size: 48px;
+      font-weight: bold;
+      color: #ff0000;
+      margin-bottom: 20px;
+      text-shadow: 0 4px 10px rgba(255, 0, 0, 0.15);
+    }
+
+    .welcome-subtitle {
+      font-size: 18px;
+      color: #666666;
+      text-align: center;
+      max-width: 80%;
+      margin-bottom: 60px;
+    }
+
+    .copyright-welcome {
+      position: absolute;
+      bottom: 40px;
+      font-size: 14px;
+      color: #888888;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Loading Screen -->
+  <div class="loading-screen" id="loading">
+    <div class="logo-container">
+      <svg viewBox="0 0 400 400">
+        <circle class="circle-outer" cx="200" cy="200" r="180" fill="none" stroke="#000000" stroke-width="3" opacity="0.8"/>
+        <circle class="circle-inner" cx="200" cy="200" r="165" fill="none" stroke="#000000" stroke-width="1.5" opacity="0.5"/>
+
+        <text x="200" y="220" text-anchor="middle" class="red-text">RED</text>
+
+        <g transform="translate(245, 105)">
+          <path d="M0,0 Q50,0 80,30 T80,80 Q80,110 50,120 T0,80 Q0,50 30,30 T80,30 Z" 
+                fill="none" stroke="#000000" stroke-width="3"/>
+          <path d="M80,80 Q100,100 80,120" fill="none" stroke="#000000" stroke-width="3"/>
+          <text x="40" y="65" text-anchor="middle" class="talk-text">Talk</text>
+        </g>
+      </svg>
+    </div>
+
+    <div class="copyright-loading">
+      © 2025 SOEPARNO ENTERPRISE Corp.
+    </div>
+  </div>
+
+  <!-- Welcome Screen -->
+  <div class="welcome-screen" id="welcome">
+    <div>
+      <h1 class="welcome-title">Welcome to RED Talk</h1>
+      <p class="welcome-subtitle">
+        Read our Privacy Policy. Tap "Agree and continue" to accept the Terms of Service.
+      </p>
+      <button style="padding: 14px 40px; font-size: 18px; background: #ff0000; color: white; border: none; border-radius: 8px; cursor: pointer;">
+        Agree and continue
+      </button>
+    </div>
+
+    <div class="copyright-welcome">
+      © 2025 SOEPARNO ENTERPRISE Corp.
+    </div>
+  </div>
+
+  <script>
+    // Fade out loading → fade in welcome setelah 5 detik
+    setTimeout(() => {
+      document.getElementById('loading').classList.add('fade-out');
+      setTimeout(() => {
+        document.getElementById('welcome').classList.add('active');
+      }, 800);
+    }, 5000); // Durasi loading 5 detik (ubah sesuka hati)
+  </script>
+
+</body>
+  </html>
