@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RED Talk</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body, html {
+      height: 100%;
+      background: #ffffff;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      overflow: hidden;
+    }
+
+    .loading {
+      position: fixed;
+      inset: 0;
+      background: #ffffff;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      transition: opacity 1.8s ease-out;
+      z-index: 10;
+    }
+
+    .loading.fade-out {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    svg {
+      width: 300px;
+      height: 300px;
+      max-width: 85vw;
+    }
+
+    /* Lingkaran muter SUPER pelan & subtle */
+    .circle {
+      animation: rotate 30s linear infinite;
+      opacity: 0.3;
+    }
+
+    @keyframes rotate {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    /* RED fade in smooth */
+    .red-text {
+      font-size: 140px;
+      font-weight: 900;
+      fill: #ff0000;
+      opacity: 0;
+      animation: fadeIn 2s ease-out forwards 0.5s;
+    }
+
+    /* Talk fade in */
+    .talk-group {
+      opacity: 0;
+      animation: fadeIn 2s ease-out forwards 1.5s;
+    }
+
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+
+    .talk-bubble {
+      font-size: 48px;
+      font-weight: bold;
+      fill: #cc0000;
+    }
+
+    .copyright-loading {
+      position: absolute;
+      bottom: 50px;
+      font-size: 14px;
+      color: #aaaaaa;
+      opacity: 0;
+      animation: fadeIn 1.5s ease-out forwards 2.5s;
+    }
+
+    /* Welcome Screen */
+    .welcome {
+      position: fixed;
+      inset: 0;
+      background: #ffffff;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      opacity: 0;
+      transition: opacity 1.8s ease-in;
+      padding: 20px;
+    }
+
+    .welcome.active {
+      opacity: 1;
+    }
+
+    .welcome-title {
+      font-size: 40px;
+      font-weight: bold;
+      color: #ff0000;
+      margin-bottom: 20px;
+    }
+
+    .welcome-text {
+      font-size: 17px;
+      color: #666666;
+      max-width: 340px;
+      line-height: 1.6;
+      margin-bottom: 70px;
+    }
+
+    .agree-btn {
+      padding: 15px 60px;
+      font-size: 18px;
+      background: #ff0000;
+      color: white;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .copyright-welcome {
+      position: absolute;
+      bottom: 50px;
+      font-size: 14px;
+      color: #aaaaaa;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="loading" id="loading">
+    <svg viewBox="0 0 400 400">
+      <circle class="circle" cx="200" cy="200" r="180" fill="none" stroke="#eeeeee" stroke-width="2"/>
+      <circle class="circle" cx="200" cy="200" r="165" fill="none" stroke="#f5f5f5" stroke-width="1" style="animation-duration: 40s; animation-direction: reverse;"/>
+
+      <text x="200" y="215" text-anchor="middle" class="red-text">RED</text>
+
+      <g class="talk-group" transform="translate(240, 110)">
+        <path d="M0,0 Q50,0 80,30 T80,80 Q80,110 50,120 T0,80 Q0,50 30,30 T80,30 Z" 
+              fill="none" stroke="#333333" stroke-width="3"/>
+        <path d="M80,80 Q100,100 80,120" fill="none" stroke="#333333" stroke-width="3"/>
+        <text x="40" y="65" text-anchor="middle" class="talk-bubble">Talk</text>
+      </g>
+    </svg>
+
+    <div class="copyright-loading">
+      © 2025 SOEPARNO ENTERPRISE Corp.
+    </div>
+  </div>
+
+  <div class="welcome" id="welcome">
+    <div>
+      <h1 class="welcome-title">Welcome to RED Talk</h1>
+      <p class="welcome-text">
+        Read our Privacy Policy. Tap "Agree and continue" to accept the Terms of Service.
+      </p>
+      <button class="agree-btn">Agree and continue</button>
+    </div>
+
+    <div class="copyright-welcome">
+      SOEPARNO Technology
+    </div>
+  </div>
+
+  <script>
+    setTimeout(() => {
+      document.getElementById('loading').classList.add('fade-out');
+      setTimeout(() => {
+        document.getElementById('welcome').classList.add('active');
+      }, 900);
+    }, 4800); // Durasi loading ~5 detik
+  </script>
+
+</body>
+  </html>
