@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RED Talk</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      background-color: #ffffff;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    }
+
+    .logo-container {
+      flex-grow: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    svg {
+      width: 250px;
+      height: 250px;
+    }
+
+    .red-text {
+      font-size: 120px;
+      font-weight: bold;
+      fill: #ff0000;
+      text-shadow: 0 4px 8px rgba(255, 0, 0, 0.3);
+    }
+
+    .talk-bubble {
+      font-size: 40px;
+      font-weight: bold;
+      fill: #d00000;
+    }
+
+    .copyright {
+      margin-bottom: 40px;
+      font-size: 14px;
+      color: #666666;
+    }
+
+    /* Optional: Auto redirect ke halaman utama setelah 3 detik */
+    /* Uncomment kalau mau */
+    /*
+    setTimeout(() => {
+      window.location.href = "chat.html"; // ganti dengan halaman chat lo
+    }, 3000);
+    */
+  </style>
+</head>
+<body>
+
+  <div class="logo-container">
+    <svg viewBox="0 0 400 400">
+      <!-- Lingkaran luar tipis -->
+      <circle cx="200" cy="200" r="180" fill="none" stroke="#000000" stroke-width="2" opacity="0.8"/>
+      <circle cx="200" cy="200" r="170" fill="none" stroke="#000000" stroke-width="1" opacity="0.6"/>
+
+      <!-- Teks RED besar merah -->
+      <text x="200" y="220" text-anchor="middle" class="red-text">RED</text>
+
+      <!-- Bubble chat dengan tulisan Talk -->
+      <g transform="translate(250, 100)">
+        <path d="M0,0 Q50,0 80,30 T80,80 Q80,110 50,120 T0,80 Q0,50 30,30 T80,30 Z" 
+              fill="none" stroke="#000000" stroke-width="3"/>
+        <path d="M80,80 Q100,100 80,120" fill="none" stroke="#000000" stroke-width="3"/>
+        <text x="40" y="65" text-anchor="middle" class="talk-bubble">Talk</text>
+      </g>
+    </svg>
+  </div>
+
+  <div class="copyright">
+    © 2025 SOEPARNO ENTERPRISE Corp.
+  </div>
+
+</body>
+  </html>
