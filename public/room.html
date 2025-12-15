@@ -3,30 +3,30 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>REDTalk — Ruang Tamu</title>
+<title>#REDChat — Ruang Tamu</title>
 <style>
-  * { box-sizing: border-box; margin:0; padding:0; }
-  body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif; background:#f5f5f5; }
-  .header { position: sticky; top:0; background:#fff; padding:14px 16px; border-bottom:1px solid #eee; z-index:10; display:flex; align-items:center; justify-content:space-between; }
-  .header h1 { font-size:20px; font-weight:700; }
-  .search { padding:10px 16px; border-bottom:1px solid #ddd; }
-  .search input { width:100%; padding:10px 14px; border-radius:20px; border:1px solid #ccc; outline:none; font-size:14px; }
-  .room-list { list-style:none; }
-  .room { display:flex; align-items:center; padding:12px 16px; gap:12px; background:#fff; cursor:pointer; border-bottom:1px solid #eee; position:relative; }
-  .room:hover { background:#f0f0f0; }
-  .avatar { width:48px; height:48px; border-radius:50%; background:#ddd; flex-shrink:0; display:flex; align-items:center; justify-content:center; font-weight:700; color:#555; overflow:hidden; }
-  .avatar img { width:100%; height:100%; object-fit:cover; border-radius:50%; }
-  .room-content { flex:1; min-width:0; }
-  .room-top { display:flex; justify-content:space-between; align-items:center; margin-bottom:4px; }
-  .room-name { font-size:15px; font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-  .room-time { font-size:12px; color:#888; flex-shrink:0; margin-left:8px; }
-  .room-preview { font-size:13px; color:#666; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-  .badge { background:#e53935; color:#fff; font-size:12px; font-weight:600; padding:2px 7px; border-radius:12px; position:absolute; right:16px; top:50%; transform:translateY(-50%); }
-  .options { position:absolute; right:36px; top:50%; transform:translateY(-50%); cursor:pointer; font-size:18px; display:none; }
-  .room:hover .options { display:block; }
-  .dropdown { position:absolute; right:36px; top:60px; background:#fff; border:1px solid #ddd; border-radius:8px; box-shadow:0 4px 12px rgba(0,0,0,0.1); display:none; flex-direction:column; min-width:150px; z-index:20; }
-  .dropdown button { padding:10px; border:none; background:none; text-align:left; width:100%; cursor:pointer; font-size:14px; }
-  .fab { position:fixed; right:18px; bottom:18px; width:56px; height:56px; border-radius:50%; background:#e53935; color:#fff; border:none; font-size:28px; line-height:0; cursor:pointer; }
+* { box-sizing: border-box; margin:0; padding:0; }
+body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif; background:#f5f5f5; }
+.header { position: sticky; top:0; background:#fff; padding:14px 16px; border-bottom:1px solid #eee; z-index:10; display:flex; align-items:center; justify-content:space-between; }
+.header h1 { font-size:20px; font-weight:700; }
+.search { padding:10px 16px; border-bottom:1px solid #ddd; }
+.search input { width:100%; padding:10px 14px; border-radius:20px; border:1px solid #ccc; outline:none; font-size:14px; }
+.room-list { list-style:none; }
+.room { display:flex; align-items:center; padding:12px 16px; gap:12px; background:#fff; cursor:pointer; border-bottom:1px solid #eee; position:relative; }
+.room:hover { background:#f0f0f0; }
+.avatar { width:48px; height:48px; border-radius:50%; background:#ddd; flex-shrink:0; display:flex; align-items:center; justify-content:center; font-weight:700; color:#555; overflow:hidden; }
+.avatar img { width:100%; height:100%; object-fit:cover; border-radius:50%; }
+.room-content { flex:1; min-width:0; }
+.room-top { display:flex; justify-content:space-between; align-items:center; margin-bottom:4px; }
+.room-name { font-size:15px; font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.room-time { font-size:12px; color:#888; flex-shrink:0; margin-left:8px; }
+.room-preview { font-size:13px; color:#666; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.badge { background:#e53935; color:#fff; font-size:12px; font-weight:600; padding:2px 7px; border-radius:12px; position:absolute; right:16px; top:50%; transform:translateY(-50%); }
+.options { position:absolute; right:36px; top:50%; transform:translateY(-50%); cursor:pointer; font-size:18px; display:none; }
+.room:hover .options { display:block; }
+.dropdown { position:absolute; right:36px; top:60px; background:#fff; border:1px solid #ddd; border-radius:8px; box-shadow:0 4px 12px rgba(0,0,0,0.1); display:none; flex-direction:column; min-width:150px; z-index:20; }
+.dropdown button { padding:10px; border:none; background:none; text-align:left; width:100%; cursor:pointer; font-size:14px; }
+.fab { position:fixed; right:18px; bottom:18px; width:56px; height:56px; border-radius:50%; background:#e53935; color:#fff; border:none; font-size:28px; line-height:0; cursor:pointer; }
 </style>
 </head>
 <body>
@@ -39,79 +39,83 @@
   <input type="text" id="searchInput" placeholder="Cari chat…" />
 </div>
 
-<ul class="room-list" id="roomList">
-  <!-- mock room items akan diinject JS -->
-</ul>
+<ul class="room-list" id="roomList"></ul>
 
 <button class="fab" title="Chat baru">+</button>
 
 <script>
-  // Mock data rooms / user
-  const rooms = [
-    {id:'self', name:'Kamarku', avatar:'', last:'Catatan pribadi & pesan ke diri sendiri', time:'Hari ini', unread:0},
-    {id:'user_1', name:'@red_biz', avatar:'', last:'Hanya RED yang bisa mengirim pesan', time:'Kemarin', unread:0},
-    {id:'user_2', name:'@bapakqu', avatar:'', last:'Telepon suara tak terjawab', time:'11/12', unread:2},
-    {id:'user_3', name:'@cikal', avatar:'', last:'Foto', time:'09/12', unread:0},
-  ];
+// Mock user conversion: email → name + username
+function emailToUser(email){
+  const [name] = email.split('@');
+  const displayName = name.split('.').map(s => s.charAt(0).toUpperCase() + s.slice(1)).join(' ');
+  return { name: displayName, username: '@'+name };
+}
 
-  // set mock user
-  const userEmail = localStorage.getItem('userEmail') || 'guest@redchat.dev';
-  document.getElementById('userId').innerText = userEmail;
+// Mock current user
+const userEmail = localStorage.getItem('userEmail') || 'john.doe@example.com';
+const user = emailToUser(userEmail);
+document.getElementById('userId').innerText = `${user.name} ${user.username}`;
 
-  const roomList = document.getElementById('roomList');
+// Mock room data
+const rooms = [
+  {id:'self', name:user.name, username:user.username, avatar:'', last:'Catatan pribadi', time:'Hari ini', unread:0},
+  {id:'user_1', name:'Red Business', username:'@red_biz', avatar:'', last:'Hanya RED yang bisa mengirim pesan', time:'Kemarin', unread:0},
+  {id:'user_2', name:'Bapak Qu', username:'@bapakqu', avatar:'', last:'Telepon tak terjawab', time:'11/12', unread:2},
+  {id:'user_3', name:'Cikal', username:'@cikal', avatar:'', last:'Foto', time:'09/12', unread:0}
+];
 
-  function renderRooms(filter='') {
-    roomList.innerHTML='';
-    rooms.filter(r=>r.name.includes(filter) || r.id.includes(filter)).forEach(r=>{
-      const li = document.createElement('li');
-      li.className='room';
-      li.onclick = ()=> window.location.href = 'chat.html?room='+r.id;
-      li.innerHTML = `
-        <div class="avatar">${r.avatar || r.name[0]}</div>
-        <div class="room-content">
-          <div class="room-top">
-            <div class="room-name">${r.name}</div>
-            <div class="room-time">${r.time}</div>
-          </div>
-          <div class="room-preview">${r.last}</div>
+const roomList = document.getElementById('roomList');
+
+function renderRooms(filter=''){
+  roomList.innerHTML='';
+  rooms.filter(r => r.name.includes(filter) || r.username.includes(filter)).forEach(r=>{
+    const li = document.createElement('li');
+    li.className='room';
+    li.onclick = ()=> window.location.href = 'chat.html?room='+r.id;
+    li.innerHTML = `
+      <div class="avatar">${r.avatar || r.name[0]}</div>
+      <div class="room-content">
+        <div class="room-top">
+          <div class="room-name">${r.name} ${r.username}</div>
+          <div class="room-time">${r.time}</div>
         </div>
-        ${r.unread>0?'<div class="badge">'+r.unread+'</div>':''}
-        <div class="options">⋮</div>
-        <div class="dropdown">
-          <button onclick="viewProfile(event,'${r.id}')">View Profile</button>
-          <button onclick="muteUser(event,'${r.id}')">Mute</button>
-          <button onclick="blockUser(event,'${r.id}')">Block</button>
-          <button onclick="deleteChat(event,'${r.id}')">Delete Chat</button>
-        </div>
-      `;
-      roomList.appendChild(li);
+        <div class="room-preview">${r.last}</div>
+      </div>
+      ${r.unread>0?'<div class="badge">'+r.unread+'</div>':''}
+      <div class="options">⋮</div>
+      <div class="dropdown">
+        <button onclick="viewProfile(event,'${r.id}')">View Profile</button>
+        <button onclick="muteUser(event,'${r.id}')">Mute</button>
+        <button onclick="blockUser(event,'${r.id}')">Block</button>
+        <button onclick="deleteChat(event,'${r.id}')">Delete Chat</button>
+      </div>
+    `;
+    roomList.appendChild(li);
 
-      // event dropdown toggle
-      const optionsBtn = li.querySelector('.options');
-      const dropdown = li.querySelector('.dropdown');
-      optionsBtn.addEventListener('click', e=>{
-        e.stopPropagation();
-        dropdown.style.display = dropdown.style.display==='flex'?'none':'flex';
-      });
-      li.addEventListener('click', e=>{ dropdown.style.display='none'; }); // klik lain hide
+    const optionsBtn = li.querySelector('.options');
+    const dropdown = li.querySelector('.dropdown');
+    optionsBtn.addEventListener('click', e=>{
+      e.stopPropagation();
+      dropdown.style.display = dropdown.style.display==='flex'?'none':'flex';
     });
-  }
-
-  renderRooms();
-
-  // search filter
-  document.getElementById('searchInput').addEventListener('input', e=>{
-    renderRooms(e.target.value);
+    li.addEventListener('click', e=>{ dropdown.style.display='none'; });
   });
+}
 
-  // mock dropdown actions
-  function viewProfile(e,id){ e.stopPropagation(); alert('View Profile: '+id);}
-  function muteUser(e,id){ e.stopPropagation(); alert('Mute: '+id);}
-  function blockUser(e,id){ e.stopPropagation(); alert('Block: '+id);}
-  function deleteChat(e,id){ e.stopPropagation(); alert('Delete Chat: '+id); }
+renderRooms();
 
-  // FAB add new chat
-  document.querySelector('.fab').addEventListener('click', ()=> alert('Buat chat baru'));
+document.getElementById('searchInput').addEventListener('input', e=>{
+  renderRooms(e.target.value);
+});
+
+// Mock dropdown actions
+function viewProfile(e,id){ e.stopPropagation(); alert('View Profile: '+id);}
+function muteUser(e,id){ e.stopPropagation(); alert('Mute: '+id);}
+function blockUser(e,id){ e.stopPropagation(); alert('Block: '+id);}
+function deleteChat(e,id){ e.stopPropagation(); alert('Delete Chat: '+id); }
+
+document.querySelector('.fab').addEventListener('click', ()=> alert('Buat chat baru'));
+
 </script>
 
 </body>
