@@ -1,0 +1,190 @@
+<!DOCTYPE html><html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>REDTalk — Rooms</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #ffffff;
+      color: #000000;
+    }/* Header */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: #ffffff;
+  padding: 14px 16px;
+  border-bottom: 1px solid #eee;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.header h1 {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+/* Search */
+.search {
+  padding: 10px 16px;
+  border-bottom: 1px solid #f0f0f0;
+}
+.search input {
+  width: 100%;
+  padding: 10px 14px;
+  border-radius: 20px;
+  border: 1px solid #ddd;
+  font-size: 14px;
+  outline: none;
+}
+
+/* Room List */
+.room-list {
+  list-style: none;
+}
+.room {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  gap: 12px;
+  cursor: pointer;
+}
+.room:hover {
+  background: #f7f7f7;
+}
+
+.avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: #ddd;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  color: #555;
+}
+
+.room-content {
+  flex: 1;
+  min-width: 0;
+}
+.room-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4px;
+}
+.room-name {
+  font-size: 15px;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.room-time {
+  font-size: 12px;
+  color: #888;
+  flex-shrink: 0;
+  margin-left: 8px;
+}
+
+.room-preview {
+  font-size: 13px;
+  color: #666;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.badge {
+  background: #ff0000;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 2px 7px;
+  border-radius: 12px;
+  margin-left: 8px;
+}
+
+/* Floating Button */
+.fab {
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: #ff0000;
+  color: #fff;
+  border: none;
+  font-size: 28px;
+  line-height: 0;
+  cursor: pointer;
+}
+
+  </style>
+</head>
+<body>  <!-- Header -->  <div class="header">
+    <h1>#REDTalk</h1>
+  </div>  <!-- Search -->  <div class="search">
+    <input type="text" placeholder="Cari chat…" />
+  </div>  <!-- Room List -->  <ul class="room-list"><!-- Kamarku (self chat) -->
+<li class="room" onclick="openChat('self')">
+  <div class="avatar">ME</div>
+  <div class="room-content">
+    <div class="room-top">
+      <div class="room-name">Kamarku</div>
+      <div class="room-time">Hari ini</div>
+    </div>
+    <div class="room-preview">Catatan pribadi & pesan ke diri sendiri</div>
+  </div>
+</li>
+
+<!-- Room dengan orang lain -->
+<li class="room" onclick="openChat('user_1')">
+  <div class="avatar">A</div>
+  <div class="room-content">
+    <div class="room-top">
+      <div class="room-name">Akun Bisnis RED</div>
+      <div class="room-time">Kemarin</div>
+    </div>
+    <div class="room-preview">Hanya RED yang bisa mengirim pesan</div>
+  </div>
+</li>
+
+<li class="room" onclick="openChat('user_2')">
+  <div class="avatar">B</div>
+  <div class="room-content">
+    <div class="room-top">
+      <div class="room-name">Bapak Qu</div>
+      <div class="room-time">11/12</div>
+    </div>
+    <div class="room-preview">Telepon suara tak terjawab</div>
+  </div>
+  <div class="badge">2</div>
+</li>
+
+<li class="room" onclick="openChat('user_3')">
+  <div class="avatar">C</div>
+  <div class="room-content">
+    <div class="room-top">
+      <div class="room-name">Cikal</div>
+      <div class="room-time">09/12</div>
+    </div>
+    <div class="room-preview">Foto</div>
+  </div>
+</li>
+
+  </ul>  <!-- New Chat Button --><button class="fab" title="Chat baru">+</button>
+
+  <script>
+    function openChat(roomId) {
+      // sementara: direct ke chat.html
+      window.location.href = 'chat.html?room=' + roomId;
+    }
+  </script></body>
+  </html>
