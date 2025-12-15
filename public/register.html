@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register - RED Talk</title>
+  <style>
+    body, html { height: 100%; margin: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #ffffff; display: flex; justify-content: center; align-items: center; }
+    .container { width: 100%; max-width: 360px; text-align: center; padding: 15px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+    h1 { color: #000; margin-bottom: 20px; }
+    input { width: 80%; padding: 14px; margin-bottom: 12px; border-radius: 8px; border: 1px solid #ccc; font-size: 16px; }
+    button { padding: 14px 45px; font-size: 16px; background: #ff0000; color: #fff; border: none; border-radius: 12px; cursor: pointer; font-weight: bold; }
+    p.notice { margin-top: 15px; font-size: 12px; color: #666; }
+    p.login-link { margin-top: 10px; font-size: 13px; }
+    p.login-link a { color: #ff0000; text-decoration: none; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>#REDTalk Trusted</h1>
+    <input type="text" id="fullName" placeholder="Nama Lengkap" required>
+    <input type="text" id="username" placeholder="Username (max 12)" maxlength="12" required>
+    <input type="email" id="email" placeholder="Email" required>
+    <input type="password" id="password" placeholder="Password" required>
+    <button id="registerBtn">Register</button>
+    <p class="notice">We will send a one-time link or code to your email to login.</p>
+    <p class="login-link">Already have an account? <a href="login.html">Login here</a></p>
+  </div>
+
+<script>
+const DEFAULT_USER = {
+  fullName: "Anna Laura Soeparno",
+  username: "annalaura.id",
+  email: "christineharijanto90@gmail.com",
+  password: "12345678",
+  lastEdit: Date.now()
+};
+
+document.getElementById('registerBtn').addEventListener('click', () => {
+  const fullName = document.getElementById('fullName').value.trim();
+  const username = document.getElementById('username').value.trim();
+  const email = document.getElementById('email').value.trim();
+  const password = document.getElementById('password').value.trim();
+
+  if(!fullName || !username || !email || !password){
+    alert("Semua field wajib diisi");
+    return;
+  }
+  if(username.length>12){ alert("Username maksimal 12 karakter"); return; }
+  if(password.length<8){ alert("Password minimal 8 karakter"); return; }
+
+  // Simpan mock user
+  localStorage.setItem("REDTalkUser", JSON.stringify({fullName, username, email, password, lastEdit: Date.now()}));
+  alert(`User ${username} registered!`);
+
+  window.location.href = "room.html";
+});
+</script>
+</body>
+</html>
