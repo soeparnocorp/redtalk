@@ -16,26 +16,26 @@
     }
     .container {
       width: 90%;
-      max-width: 400px;
+      max-width: 360px;
       text-align: center;
-      padding: 20px;
+      padding: 15px;
       border-radius: 12px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     }
     h1 {
-      color: #ff0000;
+      color: #000000; /* hitam */
       margin-bottom: 20px;
     }
     input[type="email"] {
       width: 100%;
-      padding: 15px;
-      margin-bottom: 20px;
+      padding: 14px;
+      margin-bottom: 18px;
       border-radius: 8px;
       border: 1px solid #ccc;
       font-size: 16px;
     }
     button {
-      padding: 15px 50px;
+      padding: 14px 45px;
       font-size: 16px;
       background: #ff0000;
       color: #fff;
@@ -49,6 +49,15 @@
       font-size: 12px;
       color: #666;
     }
+    p.login-link {
+      margin-top: 10px;
+      font-size: 13px;
+    }
+    p.login-link a {
+      color: #ff0000;
+      text-decoration: none;
+      font-weight: bold;
+    }
   </style>
 </head>
 <body>
@@ -58,6 +67,7 @@
     <input type="email" id="email" placeholder="Enter your email" required>
     <button id="sendBtn">Send OTP / Magic Link</button>
     <p class="notice">We will send a one-time link or code to your email to login.</p>
+    <p class="login-link">Already have an account? <a href="login.html">Login here</a></p>
   </div>
 
   <script>
